@@ -33,7 +33,6 @@ class TitleActivity : AppCompatActivity() {
             for (item in output) {
                 Toast.makeText(applicationContext, "$item", Toast.LENGTH_LONG).show()
             }
-
         }
     }
 }
