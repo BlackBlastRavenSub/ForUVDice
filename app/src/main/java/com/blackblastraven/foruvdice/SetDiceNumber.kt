@@ -12,6 +12,7 @@ class SetDiceNumber : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_dice_number)
 
+        //INPUTボタンが押された
         input.setOnClickListener {
             if (inputNumberEditText.text.toString() == "") {
                 //もし値が空だったら

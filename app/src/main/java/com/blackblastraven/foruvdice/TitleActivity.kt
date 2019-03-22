@@ -14,11 +14,12 @@ class TitleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
-
+        //Rollボタン
         moveToRoll.setOnClickListener {
             val intent = Intent(application, SetDiceNumber::class.java)
             startActivity(intent)
         }
+        //ホームページにリンク
         accesshome.setOnClickListener {
             //テスト!
             val db = Room.databaseBuilder(

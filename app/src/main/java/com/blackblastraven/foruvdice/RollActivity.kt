@@ -16,5 +16,9 @@ class RollActivity : AppCompatActivity() {
             val result = Rool(inputNumber)
             rollResultText.text = result.toString()
         }
+        //再設定ボタンが押されたらfinishして前の画面に戻る。
+        reSettingButton.setOnClickListener {
+            finish()
+        }
     }
 }
