@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ForUVDice</string>
+    <string name="Roll.exe">ROLL.EXE</string>
+    <string name="help">HELP</string>
+    <string name="setting">SETTING</string>
+    <string name="accesshome">ACCESSHOME</string>
+    <string name="setDiceNumberText">使用するダイスの面数を指定してください</string>
+    <string name="input">INPUT</string>
+    <string name="rollResultText">Roll!!</string>
+    <string name="rollButton">ROLL!</string>
+    <string name="reSettingButton">再設定</string>
+    <string name="confidentialButton">CONFIDENTIAL</string>
 </resources>
