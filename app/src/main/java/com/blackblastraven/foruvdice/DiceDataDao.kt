@@ -1,20 +1,41 @@
 package com.blackblastraven.foruvdice
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface DiceDataDao {
+
+    //プランA用のデータシステム
+
+    //データの初回登録時
+    @Insert
+    fun createDiceDaia(diceData: DiceData)
+
+    //ダイスデータの更新
+    @Update
+    fun updateDiceData(diceData: DiceData)
+
+    //1列分のダイスデータをdiceIdから検索
+    @Query("SELECT * FROM DiceData WHERE diceId=:diceId")
+    fun searchFromId(diceId: Int): List<DiceData>
+
+    //ダイスデータの削除(今回のプログラムでは削除は必要ないのでは?)
+    @Query("DELETE FROM DiceData")
+    fun allDelite()
+
+    //プランA用のデータシステムはここまで
+
+    //テストデータ
     //追加
     @Insert
     fun insertDiceData(diceData: DiceData)
 
     //クエリ
     @Query("SELECT * FROM DiceData")
-    fun getAll():List<DiceData>
+    fun getAll(): List<DiceData>
+
 /*
+    見本?
     @Query("SELECT * FROM dicedata")
     fun getAll(): List<UserDao>
 
