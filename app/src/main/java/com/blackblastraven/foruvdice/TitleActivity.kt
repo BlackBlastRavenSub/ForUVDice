@@ -29,7 +29,9 @@ class TitleActivity : AppCompatActivity() {
             ).allowMainThreadQueries()
                 .build()
             //GlobalScope.launch {
-            thread{db.DiceDataDao().insertDiceData(DiceData(0, 1, 6,1,16,0))}
+
+            //テスト用データ
+            //thread{db.DiceDataDao().insertDiceData(DiceData(0, 1, 6,1,16,0))}
             val output = db.DiceDataDao().searchFromId(0)
             for (item in output) {
                 Toast.makeText(applicationContext, "$item", Toast.LENGTH_LONG).show()
