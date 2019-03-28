@@ -15,7 +15,11 @@ interface DiceDataDao {
     @Update
     fun updateDiceData(diceData: DiceData)
 
-    //1列分のダイスデータをdiceIdから検索
+    //ダイスデータを全て取得
+    @Query("SELECT * FROM DiceData")
+    fun getAll(): List<DiceData>
+
+    //diceIdから検索して1列分のダイスデータを取得
     @Query("SELECT * FROM DiceData WHERE diceId=:diceId")
     fun searchFromId(diceId: Int): List<DiceData>
 
@@ -29,10 +33,6 @@ interface DiceDataDao {
     //追加
     @Insert
     fun insertDiceData(diceData: DiceData)
-
-    //クエリ
-    @Query("SELECT * FROM DiceData")
-    fun getAll(): List<DiceData>
 
 /*
     見本?
