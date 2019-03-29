@@ -1,5 +1,6 @@
 package com.blackblastraven.foruvdice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_roll.*
@@ -19,6 +20,12 @@ class RollActivity : AppCompatActivity() {
         //再設定ボタンが押されたらfinishして前の画面に戻る。
         reSettingButton.setOnClickListener {
             finish()
+        }
+        //Confidentialボタンが押されたら機密設定画面へ
+        confidentialButton.setOnClickListener {
+            val intent = Intent(application, ConfidentialActivity::class.java)
+            intent.putExtra("inputNumber",inputNumber)
+            startActivity(intent)
         }
     }
 }

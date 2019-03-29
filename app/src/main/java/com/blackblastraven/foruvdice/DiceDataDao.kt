@@ -28,12 +28,6 @@ interface DiceDataDao {
     fun allDelite()
 
     //プランA用のデータシステムはここまで
-
-    //テストデータ
-    //追加
-    @Insert
-    fun insertDiceData(diceData: DiceData)
-
 /*
     見本?
     @Query("SELECT * FROM dicedata")

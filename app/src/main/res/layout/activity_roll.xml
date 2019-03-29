@@ -34,7 +34,7 @@
             android:text="@string/confidentialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ConfidentialButton" android:layout_marginTop="8dp"
+            android:id="@+id/confidentialButton" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/reSettingButton" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
