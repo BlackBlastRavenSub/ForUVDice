@@ -1,14 +1,14 @@
 package com.blackblastraven.foruvdice
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.view.WindowManager
+import android.widget.*
 import android.widget.LinearLayout
-import android.widget.TableLayout
-import android.widget.TableRow
-import androidx.core.view.get
+
 
 class ConfidentialActivity : AppCompatActivity() {
 
@@ -32,12 +32,16 @@ class ConfidentialActivity : AppCompatActivity() {
             layoutInflater.inflate(R.layout.button_row, tableGroup)
             val buttonrow = tableGroup.getChildAt(i) as TableRow
             for (j in 0 until 4) {
-                buttonrow.addView(buttonPack[j + i * 4])
+                buttonrow.addView(
+                    buttonPack[j + i * 4],
+                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                )
                 //あまりが発生した時の最終行設定
                 if (i == line - 1 && inputNumber % 4 in 1..3 && inputNumber % 4 == j + 1) {
                     break
                 }
             }
+
         }
         /*
         if (i == line - 1) {
