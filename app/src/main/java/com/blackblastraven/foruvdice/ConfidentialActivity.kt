@@ -2,8 +2,13 @@ package com.blackblastraven.foruvdice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-import kotlinx.android.synthetic.main.activity_confidential.*
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TableLayout
+import android.widget.TableRow
+import androidx.core.view.get
 
 class ConfidentialActivity : AppCompatActivity() {
 
@@ -11,10 +16,73 @@ class ConfidentialActivity : AppCompatActivity() {
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confidential)
+
+        //今回何行になるか
+        var line = (inputNumber / 4)
+        if (inputNumber % 4 != 0) {
+            line += 1
+        }
+        val tableGroup = findViewById<View>(R.id.button_table_layout) as ViewGroup
+        val buttonPack = arrayOfNulls<Button>(inputNumber)
         for (i in 0 until inputNumber) {
-            layoutInflater.inflate(R.layout.setting_button, button_liner_layout)
+            buttonPack[i] = Button(applicationContext)
+            buttonPack[i]?.text = "Button$i"
         }
 
+        for (i in 0 until line) {
+            layoutInflater.inflate(R.layout.button_row, tableGroup)
+            val buttonrow = tableGroup.getChildAt(i) as TableRow
+            for (j in 0 until 4) {
+                buttonrow.addView(buttonPack[j + i * 4])
+                //あまりが発生した時の最終行設定
+                if (i == line - 1 && inputNumber % 4 in 1..3 && inputNumber % 4 == j + 1) {
+                    break
+                }
+            }
+        }
+        /*
+        if (i == line - 1) {
+                when (inputNumber % 4) {
+                    0 -> print("nothing")
+                    1 -> {
+                        layoutInflater.inflate(R.layout.button_row, tableGroup)
+                        val buttonrow = tableGroup.getChildAt(i) as TableRow
+                        buttonrow.addView(buttonPack[i * 4 + 1])
+                    }
+                    2 -> {
+                        layoutInflater.inflate(R.layout.button_row, tableGroup)
+                        val buttonrow = tableGroup.getChildAt(i) as TableRow
+                        buttonrow.addView(buttonPack[i * 4 + 1])
+                        buttonrow.addView(buttonPack[i * 4 + 2])
+                    }
+                    3 -> {
+                        layoutInflater.inflate(R.layout.button_row, tableGroup)
+                        val buttonrow = tableGroup.getChildAt(i) as TableRow
+                        buttonrow.addView(buttonPack[i * 4 + 1])
+                        buttonrow.addView(buttonPack[i * 4 + 2])
+                        buttonrow.addView(buttonPack[i * 4 + 3])
+                    }
+                }
+            }
+         */
+        //buttonXml.addView(insertView)
+        //setContentView(R.layout.activity_confidential)
+
+        /*
+        Viewの追加
+        val root = layoutInflater.inflate(R.layout.activity_confidential, null) as LinearLayout
+        val buttonLayout = layoutInflater.inflate(R.layout.setting_button, null) as LinearLayout
+        for (i in 0 until inputNumber) {
+            root.addView(buttonLayout)
+            //layoutInflater.inflate(R.layout.setting_button, button_liner_layout)
+        }
+        Viewの追加(どちらもうまくいかず)
+        for (i in 0 until inputNumber) {
+            val buttonLayout = layoutInflater.inflate(R.layout.setting_button, null) as LinearLayout
+            val input = ViewGroup.LayoutParams(300, 150)
+            addContentView(buttonLayout, input)
+        }
+        */
         //動的にボタンを作成中(最適解かはまだ不明)
         /*
         val buttonPack = Array<Button>(inputNumber) { Button(applicationContext) }
@@ -28,3 +96,26 @@ class ConfidentialActivity : AppCompatActivity() {
   */
     }
 }
+
+/*
+val buttonXml = findViewById<TableLayout>(R.id.button_table_layout)
+        val insertView = TableLayout(this)
+        val buttonPack = arrayOfNulls<Button>(inputNumber)
+        for (i in 0 until inputNumber - 1) {
+            buttonPack[i] = Button(applicationContext)
+            buttonXml.addView(buttonPack[i])
+        }
+ */
+/*
+val tableGroup = findViewById<View>(R.id.button_table_layout) as ViewGroup
+        val buttonPack = arrayOfNulls<Button>(inputNumber)
+        for (i in 0 until inputNumber - 1) {
+            buttonPack[i] = Button(applicationContext)
+        }
+        for (i in 0 until (inputNumber - 1) / 4) {
+            layoutInflater.inflate(R.layout.button_row, tableGroup)
+            val buttonrow = tableGroup.getChildAt(i) as TableRow
+            for (j in 0 until 3) {
+            }
+        }
+ */

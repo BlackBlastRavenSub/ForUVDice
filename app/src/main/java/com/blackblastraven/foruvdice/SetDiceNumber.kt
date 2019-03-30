@@ -19,7 +19,7 @@ class SetDiceNumber : AppCompatActivity() {
                 Toast.makeText(applicationContext, "値を入力してください!", Toast.LENGTH_LONG).show()
             } else {
                 val inputNumber:Int = Integer.parseInt(inputNumberEditText.text.toString())
-                if (inputNumber <= 0 || inputNumber >= 100) {
+                if (inputNumber <= 0 || inputNumber > 100) {
                     //値が0だったら
                     Toast.makeText(applicationContext, "1~100面の範囲で入力してください", Toast.LENGTH_LONG).show()
                 } else {
