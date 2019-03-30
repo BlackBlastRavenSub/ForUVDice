@@ -16,7 +16,6 @@ class ConfidentialActivity : AppCompatActivity() {
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confidential)
-
         //今回何行になるか
         var line = (inputNumber / 4)
         if (inputNumber % 4 != 0) {
