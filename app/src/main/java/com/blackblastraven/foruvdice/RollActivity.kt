@@ -14,7 +14,7 @@ class RollActivity : AppCompatActivity() {
         //ロールボタンが押されたらサイコロを振る!
         rollButton.setOnClickListener {
             //結果のテスト
-            val result = Rool(inputNumber)
+            val result = roll(applicationContext,inputNumber, -1)
             rollResultText.text = result.toString()
         }
         //再設定ボタンが押されたらfinishして前の画面に戻る。
@@ -24,7 +24,7 @@ class RollActivity : AppCompatActivity() {
         //Confidentialボタンが押されたら機密設定画面へ
         confidentialButton.setOnClickListener {
             val intent = Intent(application, ConfidentialActivity::class.java)
-            intent.putExtra("inputNumber",inputNumber)
+            intent.putExtra("inputNumber", inputNumber)
             startActivity(intent)
         }
     }
