@@ -12,13 +12,12 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     typeOfDecision=どの判定方法を使用するか
      */
     //まずデータベースにアクセスするルートを確保
-    val db = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java, "database-name2"
-    ).allowMainThreadQueries()
-        .build()
+    val db = Room.databaseBuilder(context, AppDatabase::class.java, "database-name2").allowMainThreadQueries().build()
     //まずダイス面分のDiceDataを格納する配列を用意してそこにデータベースから取ってきた値をセット!
-    val numbers = Array<DiceData>(inputNumber, {db.DiceDataDao().getAll()})
+    var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
+    for (i in 0 until inputNumber) {
+        numbers[i] = db.DiceDataDao().searchFromId(0)
+    }
     when (typeOfDecision) {
         0 -> directDecision()
         1 -> probabilityDecision()
@@ -26,7 +25,8 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
         else -> Log.d("TAG", "typeOfDecision:不正な値")
     }
     //テスト
-    return inputNumber
+    //return inputNumber
+    return numbers[0]!!.number!!
 }
 
 //直接判定(1/ダイス面)
