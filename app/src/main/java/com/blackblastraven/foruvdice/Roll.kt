@@ -20,7 +20,7 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     }
     when (typeOfDecision) {
         0 -> directDecision()
-        1 -> probabilityDecision()
+        1 -> probabilityDecision(numbers)
         2 -> multipleDecision()
         else -> Log.d("TAG", "typeOfDecision:不正な値")
     }
@@ -35,10 +35,18 @@ fun directDecision() {
 }
 
 //100分率判定(16.6..%)
-fun probabilityDecision() {
+fun probabilityDecision(numbers: Array<DiceData?>) {
+    //今合計何パーセントになっているか
+    var per = 0
     //1~100までの乱数を作成
     val random = Random.nextInt(100) + 1
-
+    for (number in numbers) {
+        if (random in per..per + number.probability) {
+            //ここに来た値が出た目
+            return number.number
+        }
+        per = +number.probability
+    }
 }
 
 //最小公倍数判定(どうやるんだっけ・・・)
