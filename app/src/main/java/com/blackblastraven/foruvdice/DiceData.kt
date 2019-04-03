@@ -16,9 +16,9 @@ data class DiceData(
     multiple=その目の出る確率(最小公倍数)
      */
     @PrimaryKey var diceId: Int,
-    @ColumnInfo(name = "number") var number: Int?,
-    @ColumnInfo(name = "whereUsed") var whereUsed: Int?,
-    @ColumnInfo(name = "fraction") var fraction: Int?,
-    @ColumnInfo(name = "probability") var probability: Int?,
-    @ColumnInfo(name = "multiple") var multiple: Int?
+    @ColumnInfo(name = "number") var number: Int,
+    @ColumnInfo(name = "whereUsed") var whereUsed: Int,
+    @ColumnInfo(name = "fraction") var fraction: Int,
+    @ColumnInfo(name = "probability") var probability: Int,
+    @ColumnInfo(name = "multiple") var multiple: Int
 )

@@ -14,7 +14,10 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     //まずデータベースにアクセスするルートを確保
     val db = Room.databaseBuilder(context, AppDatabase::class.java, "database-name2").allowMainThreadQueries().build()
     //まずダイス面分のDiceDataを格納する配列を用意してそこにデータベースから取ってきた値をセット!
-    var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
+    //ダミーデータ
+    val dummy: DiceData = DiceData(-1, -1, -1, -1, -1, -1)
+    //var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
+    var numbers = Array(inputNumber) { dummy }
     for (i in 0 until inputNumber) {
         numbers[i] = db.DiceDataDao().searchFromId(0)
     }
@@ -26,7 +29,7 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     }
     //テスト
     //return inputNumber
-    return numbers[0]!!.number!!
+    return numbers[0].number
 }
 
 //直接判定(1/ダイス面)
@@ -35,7 +38,7 @@ fun directDecision() {
 }
 
 //100分率判定(16.6..%)
-fun probabilityDecision(numbers: Array<DiceData?>) {
+fun probabilityDecision(numbers: Array<DiceData>): Int {
     //今合計何パーセントになっているか
     var per = 0
     //1~100までの乱数を作成
@@ -47,6 +50,9 @@ fun probabilityDecision(numbers: Array<DiceData?>) {
         }
         per = +number.probability
     }
+    //どれにも引っかからなかった、つまり問題が発生している。
+    Log.d("TAG", "判定結果:当てはまる値が無い!")
+    return -1
 }
 
 //最小公倍数判定(どうやるんだっけ・・・)
