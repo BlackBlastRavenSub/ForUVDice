@@ -26,8 +26,7 @@ class TitleActivity : AppCompatActivity() {
             val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name3"
-            )
-                .build()
+            ).build()
             //テスト用データ
             GlobalScope.launch {
                 if (!db.DiceDataDao().existsCheck(0)) {
