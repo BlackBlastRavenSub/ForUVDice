@@ -28,7 +28,7 @@ class TitleActivity : AppCompatActivity() {
                 AppDatabase::class.java, "database-name3"
             ).build()
             //テスト用データ
-            GlobalScope.launch {
+            GlobalScope.launch{
                 if (!db.DiceDataDao().existsCheck(0)) {
                     thread { db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6, 1, 16, 0)) }
                 }
