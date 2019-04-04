@@ -26,13 +26,13 @@ class TitleActivity : AppCompatActivity() {
             val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name3"
-            ).allowMainThreadQueries()
+            )
                 .build()
-            //GlobalScope.launch {
-
             //テスト用データ
-            if (!db.DiceDataDao().existsCheck(0)) {
-                thread { db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6, 1, 16, 0)) }
+            GlobalScope.launch {
+                if (!db.DiceDataDao().existsCheck(0)) {
+                    thread { db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6, 1, 16, 0)) }
+                }
             }
             val output = db.DiceDataDao().searchFromId(0)
             for (i in 0..5) {
