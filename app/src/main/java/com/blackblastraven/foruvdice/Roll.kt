@@ -11,30 +11,44 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     inputNumber=何面ダイスか
     typeOfDecision=どの判定方法を使用するか
      */
+    //結果を保存する変数
+    var result = -1
     //まずデータベースにアクセスするルートを確保
-    val db = Room.databaseBuilder(context, AppDatabase::class.java, "database-name2").allowMainThreadQueries().build()
-    //まずダイス面分のDiceDataを格納する配列を用意してそこにデータベースから取ってきた値をセット!
+    val db = Room.databaseBuilder(context, AppDatabase::class.java, "database-name3").allowMainThreadQueries().build()
+    //ダイス面分のDiceDataを格納する配列を用意してそこにデータベースから取ってきた値をセット!
     //ダミーデータ
     val dummy: DiceData = DiceData(-1, -1, -1, -1, -1, -1)
     //var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
     var numbers = Array(inputNumber) { dummy }
     for (i in 0 until inputNumber) {
-        numbers[i] = db.DiceDataDao().searchFromId(0)
+        //テストデータ
+        numbers[i] = db.DiceDataDao().searchFromId(i)
     }
     when (typeOfDecision) {
-        0 -> directDecision()
-        1 -> probabilityDecision(numbers)
-        2 -> multipleDecision()
+        0 -> result = directDecision(inputNumber, numbers)
+        1 -> result = probabilityDecision(numbers)
+        2 -> result = multipleDecision(numbers)
         else -> Log.d("TAG", "typeOfDecision:不正な値")
     }
-    //テスト
-    //return inputNumber
-    return numbers[0].number
+    return result
 }
 
 //直接判定(1/ダイス面)
-fun directDecision() {
-
+fun directDecision(inputNumber: Int, numbers: Array<DiceData>): Int {
+    //今合計何パーセントになっているか
+    var per = 0
+    //1~inputNumberまでの乱数を作成
+    val random = Random.nextInt(inputNumber)
+    for (number in numbers) {
+        if (random in per..per + number.fraction) {
+            //ここに来た値が出目
+            return number.number
+        }
+        per += number.fraction
+    }
+    //どれにも引っかからなかった、つまり問題が発生している。
+    Log.d("TAG", "単純判定結果:当てはまる値が無い!")
+    return -1
 }
 
 //100分率判定(16.6..%)
@@ -51,9 +65,12 @@ fun probabilityDecision(numbers: Array<DiceData>): Int {
         per = +number.probability
     }
     //どれにも引っかからなかった、つまり問題が発生している。
-    Log.d("TAG", "判定結果:当てはまる値が無い!")
+    Log.d("TAG", "100分率判定結果:当てはまる値が無い!")
     return -1
 }
 
 //最小公倍数判定(どうやるんだっけ・・・)
-fun multipleDecision() {}
+fun multipleDecision(numbers: Array<DiceData>): Int {
+    Log.d("TAG", "最小公倍数判定結果:当てはまる値が無い!")
+    return -1
+}

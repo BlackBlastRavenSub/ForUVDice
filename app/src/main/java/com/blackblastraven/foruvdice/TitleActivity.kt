@@ -25,13 +25,15 @@ class TitleActivity : AppCompatActivity() {
             //テスト!
             val db = Room.databaseBuilder(
                 applicationContext,
-                AppDatabase::class.java, "database-name2"
+                AppDatabase::class.java, "database-name3"
             ).allowMainThreadQueries()
                 .build()
             //GlobalScope.launch {
 
             //テスト用データ
-            //thread{db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6,1,16,0))}
+            if (!db.DiceDataDao().existsCheck(0)) {
+                thread { db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6, 1, 16, 0)) }
+            }
             val output = db.DiceDataDao().searchFromId(0)
             for (i in 0..5) {
                 Toast.makeText(applicationContext, "${output.number}", Toast.LENGTH_LONG).show()

@@ -14,7 +14,7 @@ class RollActivity : AppCompatActivity() {
         //ロールボタンが押されたらサイコロを振る!
         rollButton.setOnClickListener {
             //結果のテスト
-            val result = roll(applicationContext,inputNumber, -1)
+            val result = roll(applicationContext,inputNumber, 1)
             rollResultText.text = result.toString()
         }
         //再設定ボタンが押されたらfinishして前の画面に戻る。

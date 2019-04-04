@@ -19,9 +19,14 @@ interface DiceDataDao {
     @Query("SELECT * FROM DiceData")
     fun getAll(): List<DiceData>
 
+    //そのdiceIdは存在しているか?
+    @Query("SELECT EXISTS (SELECT * FROM DiceData WHERE diceId =:diceId)")
+    fun existsCheck(diceId: Int):Boolean
+
     //diceIdから検索して1列分のダイスデータを取得
     @Query("SELECT * FROM DiceData WHERE diceId=:diceId")
     fun searchFromId(diceId: Int): DiceData
+
     //ダイスデータの削除(今回のプログラムでは削除は必要ないのでは?)
     @Query("DELETE FROM DiceData")
     fun allDelite()
