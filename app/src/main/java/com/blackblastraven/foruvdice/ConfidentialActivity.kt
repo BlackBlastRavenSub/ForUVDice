@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.gridlayout.widget.GridLayout
 import kotlinx.android.synthetic.main.button_row.*
 
@@ -18,27 +19,32 @@ class ConfidentialActivity : AppCompatActivity() {
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confidential)
-        //今回何行になるか
-        var line = (inputNumber / 4)
-        if (inputNumber % 4 != 0) {
-            line += 1
-        }
         val gridGroup = findViewById<View>(R.id.button_grid_layout) as GridLayout
         val buttonPack = arrayOfNulls<Button>(inputNumber)
         for (i in 0 until inputNumber) {
             buttonPack[i] = Button(applicationContext)
+            buttonPack[i]?.tag = i
+            //とりあえずの大きさ合わせ
+            buttonPack[i]?.textSize = 11F
             buttonPack[i]?.text = "Button$i"
-
             gridGroup.addView(
                 buttonPack[i]
-                //ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                // ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             )
-        }
-        for (i in 0 until line) {
-
+            buttonPack[i]?.setOnClickListener {
+                Toast.makeText(
+                    applicationContext,
+                    buttonPack[i]?.text,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
 /*
+        var line = (inputNumber / 4)
+        if (inputNumber % 4 != 0) {
+            line += 1
+        }
         for (i in 0 until line) {
             val buttonRow = layoutInflater.inflate(R.layout.button_row, null,false) as TableRow
             for (j in 0 until 4) {
