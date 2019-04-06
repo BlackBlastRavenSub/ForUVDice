@@ -1,6 +1,7 @@
 package com.blackblastraven.foruvdice
 
 import android.content.Context
+import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,8 +21,10 @@ class ConfidentialActivity : AppCompatActivity() {
         val gridGroup = findViewById<View>(R.id.button_grid_layout) as GridLayout
         val buttonPack = arrayOfNulls<Button>(inputNumber)
         //画面サイズを取得してボタンサイズを設定・・・なんか強引
-        val scale = resources.displayMetrics.density
-        val buttonWidth = (90 * scale).toInt()
+        val display = windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
         for (i in 0 until inputNumber) {
             buttonPack[i] = Button(applicationContext)
             buttonPack[i]?.tag = i
@@ -30,7 +33,7 @@ class ConfidentialActivity : AppCompatActivity() {
             buttonPack[i]?.text = "Button$i"
             gridGroup.addView(
                 buttonPack[i]
-                , ViewGroup.LayoutParams(buttonWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+                , ViewGroup.LayoutParams(width / 4, ViewGroup.LayoutParams.WRAP_CONTENT)
             )
             buttonPack[i]?.setOnClickListener {
                 Toast.makeText(
