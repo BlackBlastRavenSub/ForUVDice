@@ -30,8 +30,8 @@ class ConfidentialActivity : AppCompatActivity() {
             buttonPack[i]?.text = "Button$i"
 
             gridGroup.addView(
-                buttonPack[i],
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                buttonPack[i]
+                //ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             )
         }
         for (i in 0 until line) {

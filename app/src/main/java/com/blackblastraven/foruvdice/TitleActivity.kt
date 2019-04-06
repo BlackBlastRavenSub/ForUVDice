@@ -41,15 +41,20 @@ class TitleActivity : AppCompatActivity() {
             val handler = Handler()
             //テスト用データ
             var output = DiceData(-1, -1, -1, -1, -1, -1)
-            //
+            /*
+            値の監視?
             val TEST = MutableLiveData<String>()
             TEST.observe(this, Observer { st ->
                 Log.d("TAG", st)
             })
+             */
             GlobalScope.launch(Dispatchers.IO) {
+                //try-catch
                 runCatching {
                 }
+                    //もし成功したら
                     .onSuccess { }
+                    //もし失敗したら
                     .onFailure { }
                 //もし登録しようとしているidが既に存在していたら、追加ではなく更新する。
                 if (!db.DiceDataDao().existsCheck(0)) {
@@ -67,7 +72,7 @@ class TitleActivity : AppCompatActivity() {
                 }
                 //この中だけ指定したThreadに処理が切り替わる
                 withContext(Dispatchers.Main) {
-                    TEST.value = "input!"
+                    //TEST.value = "input!"
                 }
             }
 
