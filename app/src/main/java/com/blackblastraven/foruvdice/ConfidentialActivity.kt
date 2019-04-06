@@ -12,24 +12,25 @@ import android.widget.Toast
 import androidx.gridlayout.widget.GridLayout
 import kotlinx.android.synthetic.main.button_row.*
 
-
 class ConfidentialActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confidential)
         val gridGroup = findViewById<View>(R.id.button_grid_layout) as GridLayout
         val buttonPack = arrayOfNulls<Button>(inputNumber)
+        //画面サイズを取得してボタンサイズを設定・・・なんか強引
+        val scale = resources.displayMetrics.density
+        val buttonWidth = (90 * scale).toInt()
         for (i in 0 until inputNumber) {
             buttonPack[i] = Button(applicationContext)
             buttonPack[i]?.tag = i
-            //とりあえずの大きさ合わせ
+            //とりあえずの大きさ合わせ、これでは強引だ
             buttonPack[i]?.textSize = 11F
             buttonPack[i]?.text = "Button$i"
             gridGroup.addView(
                 buttonPack[i]
-                // ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                , ViewGroup.LayoutParams(buttonWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
             )
             buttonPack[i]?.setOnClickListener {
                 Toast.makeText(
