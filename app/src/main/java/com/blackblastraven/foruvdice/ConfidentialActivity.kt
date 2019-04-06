@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.*
+import android.widget.Button
 import android.widget.LinearLayout
+import androidx.gridlayout.widget.GridLayout
+import kotlinx.android.synthetic.main.button_row.*
 
 
 class ConfidentialActivity : AppCompatActivity() {
@@ -21,18 +23,26 @@ class ConfidentialActivity : AppCompatActivity() {
         if (inputNumber % 4 != 0) {
             line += 1
         }
-        val tableGroup = findViewById<View>(R.id.button_table_layout) as ViewGroup
+        val gridGroup = findViewById<View>(R.id.button_grid_layout) as GridLayout
         val buttonPack = arrayOfNulls<Button>(inputNumber)
         for (i in 0 until inputNumber) {
             buttonPack[i] = Button(applicationContext)
             buttonPack[i]?.text = "Button$i"
+
+            gridGroup.addView(
+                buttonPack[i],
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            )
+        }
+        for (i in 0 until line) {
+
         }
 
+/*
         for (i in 0 until line) {
-            layoutInflater.inflate(R.layout.button_row, tableGroup)
-            val buttonrow = tableGroup.getChildAt(i) as TableRow
+            val buttonRow = layoutInflater.inflate(R.layout.button_row, null,false) as TableRow
             for (j in 0 until 4) {
-                buttonrow.addView(
+                buttonRow.addView(
                     buttonPack[j + i * 4],
                     LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 )
@@ -41,8 +51,9 @@ class ConfidentialActivity : AppCompatActivity() {
                     break
                 }
             }
-
+            tableGroup.addView(buttonRow)
         }
+        */
         /*
         if (i == line - 1) {
                 when (inputNumber % 4) {
@@ -120,5 +131,37 @@ val tableGroup = findViewById<View>(R.id.button_table_layout) as ViewGroup
             val buttonrow = tableGroup.getChildAt(i) as TableRow
             for (j in 0 until 3) {
             }
+        }
+ */
+/*
+val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_confidential)
+        //今回何行になるか
+        var line = (inputNumber / 4)
+        if (inputNumber % 4 != 0) {
+            line += 1
+        }
+        val tableGroup = findViewById<View>(R.id.button_table_layout) as TableLayout
+        val buttonPack = arrayOfNulls<Button>(inputNumber)
+        for (i in 0 until inputNumber) {
+            buttonPack[i] = Button(applicationContext)
+            buttonPack[i]?.text = "Button$i"
+        }
+
+        for (i in 0 until line) {
+            layoutInflater.inflate(R.layout.button_row, tableGroup)
+            val buttonRow = tableGroup.getChildAt(i) as TableRow
+            for (j in 0 until 4) {
+                buttonRow.addView(
+                    buttonPack[j + i * 4],
+                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                )
+                //あまりが発生した時の最終行設定
+                if (i == line - 1 && inputNumber % 4 in 1..3 && inputNumber % 4 == j + 1) {
+                    break
+                }
+            }
+
         }
  */

@@ -20,6 +20,7 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     val dummy: DiceData = DiceData(-1, -1, -1, -1, -1, -1)
     //var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
     var numbers = Array(inputNumber) { dummy }
+    //var numbers = Array(inputNumber) { db.DiceDataDao().searchFromId(it + 1) }
     for (i in 0 until inputNumber) {
         //テストデータ
         numbers[i] = db.DiceDataDao().searchFromId(i)

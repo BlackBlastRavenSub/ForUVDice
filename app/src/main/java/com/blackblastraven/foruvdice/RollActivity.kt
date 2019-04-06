@@ -6,7 +6,6 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_roll.*
 
 class RollActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
