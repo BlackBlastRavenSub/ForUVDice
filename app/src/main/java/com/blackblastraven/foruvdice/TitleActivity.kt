@@ -40,7 +40,7 @@ class TitleActivity : AppCompatActivity() {
             //handler
             val handler = Handler()
             //テスト用データ
-            var output = DiceData(-1, -1, -1, -1, -1, -1)
+            var output = DiceData("-1", -1, -1, -1, -1, -1)
             /*
             値の監視?
             val TEST = MutableLiveData<String>()
@@ -58,9 +58,9 @@ class TitleActivity : AppCompatActivity() {
                     .onFailure { }
                 //もし登録しようとしているidが既に存在していたら、追加ではなく更新する。
                 if (!db.DiceDataDao().existsCheck(0)) {
-                    db.DiceDataDao().createDiceDaia(DiceData(0, 1, 6, 1, 16, 0))
+                    db.DiceDataDao().createDiceDaia(DiceData("0_0", 1, 6, 1, 16, 0))
                 } else {
-                    db.DiceDataDao().updateDiceData(DiceData(0, 1, 6, 1, 16, 0))
+                    db.DiceDataDao().updateDiceData(DiceData("0_0", 1, 6, 1, 16, 0))
                 }
                 output = db.DiceDataDao().searchFromId(0)
                 handler.post {

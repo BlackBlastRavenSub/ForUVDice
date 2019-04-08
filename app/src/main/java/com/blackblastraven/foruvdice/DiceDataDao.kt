@@ -21,7 +21,7 @@ interface DiceDataDao {
 
     //そのdiceIdは存在しているか?
     @Query("SELECT EXISTS (SELECT * FROM DiceData WHERE diceId =:diceId)")
-    fun existsCheck(diceId: Int):Boolean
+    fun existsCheck(diceId: String):Boolean
 
     //diceIdから検索して1列分のダイスデータを取得
     @Query("SELECT * FROM DiceData WHERE diceId=:diceId")

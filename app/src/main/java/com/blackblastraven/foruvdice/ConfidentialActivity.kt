@@ -11,7 +11,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.gridlayout.widget.GridLayout
+import androidx.room.Room
 import kotlinx.android.synthetic.main.button_row.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ConfidentialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +122,24 @@ class ConfidentialActivity : AppCompatActivity() {
             setContentView(buttonPack[i])
         }
   */
+    }
+
+    fun saveData(diceid: String) {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name3"
+        ).build()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            //try-catch
+            runCatching {
+                db.DiceDataDao().updateDiceData(DiceData(diceid, 1, 6, 1, 16, 0))
+            }
+                //もし成功したら
+                .onSuccess { }
+                //もし失敗したら
+                .onFailure { }
+        }
     }
 }
 

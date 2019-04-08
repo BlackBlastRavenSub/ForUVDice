@@ -15,7 +15,7 @@ data class DiceData(
     probability=その目の出る確率(100分率,16.666..%)
     multiple=その目の出る確率(最小公倍数)
      */
-    @PrimaryKey var diceId: Int,
+    @PrimaryKey var diceId: String,
     @ColumnInfo(name = "number") var number: Int,
     @ColumnInfo(name = "whereUsed") var whereUsed: Int,
     @ColumnInfo(name = "fraction") var fraction: Int,
