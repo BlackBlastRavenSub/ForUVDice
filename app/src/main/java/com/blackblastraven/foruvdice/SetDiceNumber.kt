@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_set_dice_number.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SetDiceNumber : AppCompatActivity() {
 
@@ -25,6 +28,7 @@ class SetDiceNumber : AppCompatActivity() {
                     Toast.makeText(applicationContext, "1~100面の範囲で入力してください", Toast.LENGTH_LONG).show()
                 } else {
                     //成立!!
+                    diceDataCreate(inputNumber)
                     val intent = Intent(applicationContext, RollActivity::class.java)
                     intent.putExtra("inputNumber", inputNumber)
                     startActivity(intent)
@@ -38,13 +42,15 @@ class SetDiceNumber : AppCompatActivity() {
             applicationContext,
             AppDatabase::class.java, "database-name3"
         ).build()
-        for (i in 0 until inputNumber) {
-            val diceId = inputNumber.toString() + "_" + i
-            //もし登録しようとしているidが既に存在していたら、追加ではなく更新する。
-            if (!db.DiceDataDao().existsCheck(diceId)) {
-                db.DiceDataDao().createDiceDaia(DiceData(diceId, 1, 6, 1, 16, 0))
-            } else {
-                db.DiceDataDao().updateDiceData(DiceData(diceId, 1, 6, 1, 16, 0))
+        GlobalScope.launch(Dispatchers.IO) {
+            for (i in 1 until inputNumber + 1) {
+                val diceId = inputNumber.toString() + "_" + i
+                //初期データ
+                val preset: DiceData = DiceData(diceId, i, inputNumber, 1, 100 / inputNumber, 0)
+                //もし登録しようとしているidが既に存在していたら、追加しない。
+                if (!db.DiceDataDao().existsCheck(diceId)) {
+                    db.DiceDataDao().createDiceDaia(preset)
+                }
             }
         }
     }

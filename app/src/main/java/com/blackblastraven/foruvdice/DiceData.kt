@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class DiceData(
     /*
     プランAのデータベース
-    diceId=識別id(ダイスの面数)
+    diceId=識別id(ダイスの面数+それがどの面か。6面ダイスの3なら6_3)
     number=ダイスの目(1,2,3...)
     whereUsed=この目がどのダイスで使われているか?(6面ダイスで使用されているなら6)
     fraction=その目の出る確率(単純分数,1/6なら1と表記する)

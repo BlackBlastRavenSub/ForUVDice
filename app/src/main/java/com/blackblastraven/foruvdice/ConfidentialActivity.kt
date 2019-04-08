@@ -9,16 +9,24 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.gridlayout.widget.GridLayout
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_confidential.*
 import kotlinx.android.synthetic.main.button_row.*
+import kotlinx.android.synthetic.main.layout_confidential_dialog.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ConfidentialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        //データベースの作成、とりあえずここに置く
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name3"
+        ).build()
         val inputNumber: Int = intent.getIntExtra("inputNumber", -1)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confidential)
@@ -45,6 +53,10 @@ class ConfidentialActivity : AppCompatActivity() {
                     buttonPack[i]?.text,
                     Toast.LENGTH_LONG
                 ).show()
+                //ダイアログの生成
+                val dialog = ConfidentialDialog.newInstance()
+                //ダイアログの表示
+                dialog.show(supportFragmentManager, "dialog")
             }
         }
 
@@ -122,6 +134,22 @@ class ConfidentialActivity : AppCompatActivity() {
             setContentView(buttonPack[i])
         }
   */
+
+        reset.setOnClickListener {
+            //データの再設定
+            GlobalScope.launch(Dispatchers.IO) {
+                for (i in 1 until inputNumber + 1) {
+                    val diceId = inputNumber.toString() + "_" + i
+                    //初期データ
+                    val preset: DiceData = DiceData(diceId, i, inputNumber, 1, 100 / inputNumber, 0)
+                    //初期データで全て上書きする。
+                    if (!db.DiceDataDao().existsCheck(diceId)) {
+                        db.DiceDataDao().createDiceDaia(preset)
+                    }
+                }
+            }
+            //画面に反映
+        }
     }
 
     fun saveData(diceid: String) {
