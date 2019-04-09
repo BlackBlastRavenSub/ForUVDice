@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.NumberPicker
 import androidx.fragment.app.DialogFragment
 
@@ -29,6 +30,12 @@ class ConfidentialDialog : DialogFragment() {
         numpick.maxValue = 50
         numpick.minValue = 0
         numpick.value = 0
+
+        //OKボタンの用意
+        val okButton = content.findViewById<Button>(R.id.okButton)
+        okButton.setOnClickListener {
+            numpick.value
+        }
         return content
     }
 }

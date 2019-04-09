@@ -3,10 +3,10 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:orientation="horizontal"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content">
     <NumberPicker android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:id="@+id/numberPicker" android:layout_marginTop="232dp"
+                  android:id="@+id/numberPicker"
                   app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                   app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"
                   app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -15,14 +15,14 @@
     </NumberPicker>
 
     <Button
-            android:text="Button"
+            android:text="OK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4" android:layout_marginTop="8dp"
+            android:id="@+id/okButton" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/numberPicker" app:layout_constraintEnd_toEndOf="@+id/numberPicker"
             app:layout_constraintStart_toStartOf="@+id/numberPicker"/>
     <Button
-            android:text="Button"
+            android:text="+1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/plusOneButton"
@@ -30,21 +30,21 @@
             android:layout_marginStart="8dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="@+id/numberPicker"/>
     <Button
-            android:text="Button"
+            android:text="+10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/plusTenButton" app:layout_constraintStart_toEndOf="@+id/numberPicker"
             android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/numberPicker"/>
     <Button
-            android:text="Button"
+            android:text="-1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/minusOneButton" app:layout_constraintEnd_toStartOf="@+id/numberPicker"
             android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="@+id/numberPicker"/>
     <Button
-            android:text="Button"
+            android:text="-10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/minusTenButton" app:layout_constraintEnd_toStartOf="@+id/numberPicker"
