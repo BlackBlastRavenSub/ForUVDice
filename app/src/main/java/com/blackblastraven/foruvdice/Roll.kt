@@ -21,9 +21,9 @@ fun roll(context: Context, inputNumber: Int, typeOfDecision: Int): Int {
     //var numbers: Array<DiceData?> = arrayOfNulls(inputNumber)
     var numbers = Array(inputNumber) { dummy }
     //var numbers = Array(inputNumber) { db.DiceDataDao().searchFromId(it + 1) }
-    for (i in 1 until inputNumber+1) {
+    for (i in 1 until inputNumber + 1) {
         //テストデータ
-        numbers[i-1] = db.DiceDataDao().searchFromId(inputNumber.toString() + "_" + i)
+        numbers[i - 1] = db.DiceDataDao().searchFromId(inputNumber.toString() + "_" + i)
     }
     when (typeOfDecision) {
         0 -> result = directDecision(inputNumber, numbers)
@@ -64,7 +64,7 @@ fun probabilityDecision(numbers: Array<DiceData>): Int {
             return number.number
         }
         per += number.probability
-        Log.d("TAG",per.toString())
+        Log.d("TAG", per.toString())
     }
     //どれにも引っかからなかった、つまり問題が発生している。
     Log.d("TAG", "100分率判定結果:当てはまる値が無い!")

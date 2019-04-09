@@ -46,7 +46,7 @@ class SetDiceNumber : AppCompatActivity() {
             for (i in 1 until inputNumber + 1) {
                 val diceId = inputNumber.toString() + "_" + i
                 //初期データ
-                val preset: DiceData = DiceData(diceId, i, inputNumber, 1, 100 / inputNumber, 0)
+                val preset = DiceData(diceId, i, inputNumber, 1, 100 / inputNumber, 0)
                 //もし登録しようとしているidが既に存在していたら、追加しない。
                 if (!db.DiceDataDao().existsCheck(diceId)) {
                     db.DiceDataDao().createDiceDaia(preset)

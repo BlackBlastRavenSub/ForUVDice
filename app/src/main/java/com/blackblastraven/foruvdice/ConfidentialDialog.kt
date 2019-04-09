@@ -23,8 +23,7 @@ class ConfidentialDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //データベースの用意と数値の取り出し
-
-
+        
         val content = inflater.inflate(R.layout.layout_confidential_dialog, container)
         //numberPickerの用意
         val numpick = content.findViewById<NumberPicker>(R.id.numberPicker)
