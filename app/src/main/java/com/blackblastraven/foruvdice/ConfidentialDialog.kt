@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.DialogFragment
 
 class ConfidentialDialog : DialogFragment() {
@@ -15,15 +16,19 @@ class ConfidentialDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog=super.onCreateDialog(savedInstanceState)
-        //numberPickerの用意
-        numberPicker.maxValue = 50
-        numberPicker.minValue = 0
-        numberPicker.value=0
+        val dialog = super.onCreateDialog(savedInstanceState)
+        return dialog
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.layout_confidential_dialog, container)
+        //return inflater.inflate(R.layout.layout_confidential_dialog, container)
+        val content = inflater.inflate(R.layout.layout_confidential_dialog, container)
+        //numberPickerの用意
+        val numpick = content.findViewById<NumberPicker>(R.id.numberPicker)
+        numpick.maxValue = 50
+        numpick.minValue = 0
+        numpick.value = 0
+        return content
     }
 }
