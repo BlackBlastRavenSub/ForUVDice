@@ -22,14 +22,36 @@ class ConfidentialDialog : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
-        //return inflater.inflate(R.layout.layout_confidential_dialog, container)
+        //データベースの用意と数値の取り出し
+
+
         val content = inflater.inflate(R.layout.layout_confidential_dialog, container)
         //numberPickerの用意
         val numpick = content.findViewById<NumberPicker>(R.id.numberPicker)
-        numpick.maxValue = 50
+        numpick.maxValue = 100
         numpick.minValue = 0
         numpick.value = 0
+        //+1ボタンの用意
+        val plusOneButton = content.findViewById<Button>(R.id.plusOneButton)
+        plusOneButton.setOnClickListener {
+            numpick.value = numpick.value + 1
+        }
+        //+10ボタンの用意
+        val plusTenButton = content.findViewById<Button>(R.id.plusTenButton)
+        plusTenButton.setOnClickListener {
+            numpick.value = numpick.value + 10
+        }
+        //-1ボタン
+        val minusOneButton = content.findViewById<Button>(R.id.minusOneButton)
+        minusOneButton.setOnClickListener {
+            numpick.value = numpick.value - 1
+        }
+
+        //-10ボタン
+        val minusTenButton = content.findViewById<Button>(R.id.minusTenButton)
+        minusTenButton.setOnClickListener {
+            numpick.value = numpick.value - 10
+        }
 
         //OKボタンの用意
         val okButton = content.findViewById<Button>(R.id.okButton)
